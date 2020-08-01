@@ -1,0 +1,3 @@
+Создать Service Account bob, дать ему роль admin в рамках всего
+кластера
+Создать Service Account dave без доступа к кластеру

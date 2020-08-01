@@ -1,0 +1,47 @@
+repositories:
+- name: stable
+  url: https://kubernetes-charts.storage.googleapis.com
+- name: jetstack
+  url: https://charts.jetstack.io
+- name: harbor
+  url: https://helm.goharbor.io
+- name: incubator
+  url: https://kubernetes-charts-incubator.storage.googleapis.com
+
+helmDefaults:
+  wait: true
+releases:
+  - name: cert-manager
+    namespace: cert-manager
+    chart: jetstack/cert-manager
+    version : 0.15.1
+    set:
+      - name:  installCRDs
+        value: true
+
+  - name: cert-manger-issuer
+    needs:
+      - cert-manager/cert-manager
+    namespace: cert-manger-issuer
+    chart: incubator/raw
+    version: 0.2.3
+    values: 
+      - ./cert-manager/values.yaml
+
+  - name: harbor
+    needs:
+      - cert-manager/cert-manager
+    namespace: harbor
+    chart: harbor/harbor
+    version: 1.3.2
+    values: 
+     - ./harbor/values.yaml
+
+  - name: chartmuseum
+    needs:
+      - cert-manager/cert-manager
+    namespace: chartmuseum
+    chart: stable/chartmuseum
+    version: 2.13.0
+    values: 
+     - ./chartmuseum/values.yaml
