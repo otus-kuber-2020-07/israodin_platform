@@ -1,0 +1,34 @@
+apiVersion: otus.homework/v1
+kind: MySQL
+metadata:
+  name: mysql-instance
+spec:
+  image: mysql:5.7
+  database: otus-database
+  password: otuspassword  # Так делать не нужно, следует использовать secret
+  storage_size: 1Gi
+usless_data: "useless info"
+validation:
+      openAPIV3Schema:
+      type: object
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+        metadata:
+          type: object
+          properties:
+            name:
+              type: string
+        spec:
+          type: object
+          properties:
+            image: 
+              type: string
+            database:
+              type: string
+            password:
+              type: string
+            storage_size:
+              type: string
