@@ -15,4 +15,28 @@ spec:
     singular: mysql
     shortNames:
       - ms
-    
+  validation:
+    openAPIV3Schema:
+      type: object
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+        metadata:
+          type: object
+          properties:
+            name:
+              type: string
+        spec:
+          type: object
+          required: ["image", "database", "password", "storage_size"]
+          properties:
+            image: 
+              type: string
+            database:
+              type: string
+            password:
+              type: string
+            storage_size:
+              type: string
