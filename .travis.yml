@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+  
+>>>>>>> d9f1963600a671f36084550f3fc25b7709952b02
 dist: bionic
 language: bash
 sudo: required

@@ -1,0 +1,4 @@
+Создать Namespace prometheus
+Создать Service Account carol в этом Namespace
+Дать всем Service Account в Namespace prometheus возможность
+делать get, list, watch в отношении Pods всего кластера
