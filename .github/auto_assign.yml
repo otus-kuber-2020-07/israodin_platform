@@ -2,9 +2,5 @@
 addAssignees: true
 
 # A list of reviewers to be added to pull requests (GitHub user name)
-<<<<<<< HEAD
-reviewers:
-=======
-reviewers: 
->>>>>>> d9f1963600a671f36084550f3fc25b7709952b02
+
   - express42-bot
