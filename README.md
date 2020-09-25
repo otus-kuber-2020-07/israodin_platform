@@ -15,7 +15,10 @@
 Как можно догадаться из названия, мы планируем отдать три из четырех нод кластера под инфраструктурные сервисы.  
 Присвоим этим нодам определенный , чтобы избежать запуска на них случайных pod.  
 Укажем следующую конфигурацию [taint](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) через web-интерфейс GCP: **node-role=infra:NoSchedule**
-
+example :
+ kubectl taint nodes gke-logging-default-pool-fa6dab3a-17qm node-role=infra:NoSchedule
+ kubectl taint nodes gke-logging-default-pool-fa6dab3a-48xl node-role=infra:NoSchedule
+ kubectl taint nodes gke-logging-default-pool-fa6dab3a-jt9v node-role=infra:NoSchedule
 В результате должна получиться следующая конфигурация кластера:
 
 ```console
