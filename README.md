@@ -272,7 +272,7 @@ controller:
 Развернем:
 
 ```console
-helm upgrade --install nginx-ingress stable/nginx-ingress --wait \
+helm3 upgrade --install nginx-ingress stable/nginx-ingress --wait \
 --namespace=nginx-ingress \
 --version=1.39.0 -f nginx-ingress.values.yaml --create-namespace
 Release "nginx-ingress" does not exist. Installing it now.
@@ -334,7 +334,11 @@ nginx-ingress-default-backend-5b967cf596-7pckn   1/1     Running   0          3m
 ```
 
 ### Установка EFK стека | Kibana
-
+```console
+kubectl --namespace nginx-ingress get services -o wide -w nginx-ingress-controller
+NAME                       TYPE           CLUSTER-IP   EXTERNAL-IP    PORT(S)                      AGE   SELECTOR
+nginx-ingress-controller   LoadBalancer   10.8.7.102   34.66.28.196   80:31112/TCP,443:32167/TCP   16m   app.kubernetes.io/component=controller,app=nginx-ingress,release=nginx-ingress
+```
 По традиции создадим файл kibana.values.yaml в директории kubernetes-logging и добавим туда конфигурацию для создания ingress:
 
 ```yml
@@ -345,13 +349,13 @@ ingress:
   }
   path: /
   hosts:
-    - kibana.35.205.196.95.xip.io
+    - kibana.MYIP.xip.io
 ```
 
 Обновим релиз:
 
 ```console
-helm upgrade --install kibana elastic/kibana --namespace observability -f kibana.values.yaml
+helm3 upgrade --install kibana elastic/kibana --namespace observability -f kibana.values.yaml
 Release "kibana" has been upgraded. Happy Helming!
 NAME: kibana
 LAST DEPLOYED: Sat Jun  6 12:27:19 2020
@@ -363,7 +367,7 @@ TEST SUITE: None
 
 ### Установка EFK стека
 
-После прохождения всех предыдущих шагов у вас должен появиться доступ к Kibana по URL **kibana.35.205.196.95.xip.io**  
+После прохождения всех предыдущих шагов у вас должен появиться доступ к Kibana по URL **kibana.MYIP.xip.io**  
 
 Попробуем создать index pattern, и увидим, что в ElasticSearch пока что не обнаружено никаких данных.
 
@@ -388,7 +392,7 @@ backend:
 > Описание того, что мы сделали, можно найти в [документации](https://fluentbit.io/documentation/0.13/output/elasticsearch.html) и в оригинальном файле [values](https://github.com/helm/charts/blob/master/stable/fluent-bit/values.yaml)
 
 ```console
-helm upgrade --install fluent-bit stable/fluent-bit --namespace observability -f fluent-bit.values.yaml
+helm3 upgrade --install fluent-bit stable/fluent-bit --namespace observability -f fluent-bit.values.yaml
 Release "fluent-bit" has been upgraded. Happy Helming!
 NAME: fluent-bit
 LAST DEPLOYED: Sat Jun  6 12:31:46 2020

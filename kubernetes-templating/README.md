@@ -1502,7 +1502,7 @@ customresourcedefinition.apiextensions.k8s.io/orders.acme.cert-manager.io create
 Установим cert-manager:
 
 ```console
-helm install cert-manager jetstack/cert-manager --namespace cert-manager --version v0.15.1
+helm3 install cert-manager jetstack/cert-manager --namespace cert-manager --version v0.15.1
 
 NAME: cert-manager
 LAST DEPLOYED: Wed May 27 22:19:16 2020
