@@ -441,7 +441,7 @@ rawConfig: |
 Обновим:
 
 ```console
-helm upgrade --install fluent-bit stable/fluent-bit --namespace observability -f fluent-bit.values.yaml
+helm3 upgrade --install fluent-bit stable/fluent-bit --namespace observability -f fluent-bit.values.yaml
 Release "fluent-bit" has been upgraded. Happy Helming!
 NAME: fluent-bit
 LAST DEPLOYED: Sat Jun  6 12:44:32 2020
@@ -482,7 +482,7 @@ prometheus:
       }
       path: /
       hosts:
-        - prometheus.35.205.196.95.xip.io
+        - prometheus.34.66.28.196.xip.io
   prometheusSpec:
     tolerations:
     - key: node-role
@@ -498,11 +498,11 @@ grafana:
       }
       path: /
       hosts:
-        - grafana.35.205.196.95.xip.io
+        - grafana.34.66.28.196.xip.io
 ```
 
 ```console
-helm upgrade --install  prometheus-operator stable/prometheus-operator -n observability --create-namespace -f prometheus.values.yaml
+helm3 upgrade --install  prometheus-operator stable/prometheus-operator -n observability --create-namespace -f prometheus.values.yaml
 Release "prometheus-operator" does not exist. Installing it now.
 manifest_sorter.go:192: info: skipping unknown hook: "crd-install"
 manifest_sorter.go:192: info: skipping unknown hook: "crd-install"
@@ -526,7 +526,7 @@ to create & configure Alertmanager and Prometheus instances using the Operator.
 - Установим prometheus exporter
 
 ```console
-helm upgrade --install elasticsearch-exporter stable/elasticsearch-exporter --set es.uri=http://elasticsearch-master:9200 --set serviceMonitor.enabled=true --namespace=observability
+helm3 upgrade --install elasticsearch-exporter stable/elasticsearch-exporter --set es.uri=http://elasticsearch-master:9200 --set serviceMonitor.enabled=true --namespace=observability
 
 Release "elasticsearch-exporter" does not exist. Installing it now.
 NAME: elasticsearch-exporter
@@ -685,7 +685,7 @@ tolerations:
 ```
 
 ```console
-helm upgrade --install fluent-bit stable/fluent-bit --namespace observability -f fluent-bit.values.yaml
+helm3 upgrade --install fluent-bit stable/fluent-bit --namespace observability -f fluent-bit.values.yaml
 Release "fluent-bit" has been upgraded. Happy Helming!
 NAME: fluent-bit
 LAST DEPLOYED: Sat Jun  6 15:57:57 2020
@@ -796,7 +796,9 @@ metadata:
 - Модифицируем конфигурацию prometheus-operator таким образом, чтобы datasource Loki создавался сразу после установки оператора
 - Итоговый файл prometheus-operator.values.yaml выложим в репозиторий в директорию kubernetes-logging
 - Включим метрики для nginx-ingress
-
+helm3 repo add loki https://grafana.github.io/loki/charts
+helm3 repo update
+helm3 upgrade --install loki --namespace=loki loki/loki
 loki.values.yaml
 
 ```yml
@@ -834,7 +836,7 @@ helm repo add loki https://grafana.github.io/loki/charts
 
 helm repo update
 
-helm upgrade --install loki loki/loki-stack -n observability -f  loki.values.yaml
+helm3 upgrade --install loki loki/loki-stack -n observability -f  loki.values.yaml
 Release "loki" does not exist. Installing it now.
 NAME: loki
 LAST DEPLOYED: Sat Jun  6 17:00:38 2020
@@ -910,6 +912,10 @@ sum(rate(nginx_ingress_controller_requests{controller_pod=~"$controller",control
 ### Event logging | k8s-event-logger
 
 Также можно обратить внимание на еще одну небольшую, но очень полезную [утилиту](https://github.com/max-rocket-internet/k8s-event-logger), позволяющую получить и сохранить event'ы Kubernetes в выбранном решении для логирования
+
+git clone https://github.com/max-rocket-internet/k8s-event-logger.git
+cd k8s-event-logger
+helm3 upgrade --install event-logger -n observability chart/
 
 Например, event, говорящий нам о том, что liveness probe у prometheus-operator выполнилась неуспешно
 
