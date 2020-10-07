@@ -2283,8 +2283,8 @@ CMD kopf run /mysql-operator.py
 Соберем и сделаем push в dockerhub наш образ с оператором:
 
 ```console
-docker build -t kovtalex/mysql-operator:0.1 .
-docker push kovtalex/mysql-operator:0.1
+docker build -t israodin/mysql-operator:0.1 .
+docker push israodin/mysql-operator:0.1
 ```
 
 ### Деплой оператора
@@ -2736,7 +2736,7 @@ metadata:
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: kovtalex@gmail.com
+    email: israodin@gmail.com
     privateKeySecretRef:
       name: letsencrypt-production
     solvers:
@@ -2755,7 +2755,7 @@ metadata:
 spec:
   acme:
     server: https://acme-staging-v02.api.letsencrypt.org/directory
-    email: kovtalex@gmail.com
+    email: israodin@gmail.com
     privateKeySecretRef:
       name: letsencrypt-staging
     solvers:
@@ -2787,7 +2787,7 @@ Metadata:
   UID:                 6491edb5-382c-48a9-bc92-a000342dc334
 Spec:
   Acme:
-    Email:  kovtalex@gmail.com
+    Email:  israodin@gmail.com
     Private Key Secret Ref:
       Name:  letsencrypt-production
     Server:  https://acme-v02.api.letsencrypt.org/directory
@@ -2797,7 +2797,7 @@ Spec:
           Class:  nginx
 Status:
   Acme:
-    Last Registered Email:  kovtalex@gmail.com
+    Last Registered Email:  israodin@gmail.com
     Uri:                    https://acme-v02.api.letsencrypt.org/acme/acct/87525196
   Conditions:
     Last Transition Time:  2020-05-30T17:09:47Z
@@ -2827,7 +2827,7 @@ Metadata:
   UID:                 29366949-a45a-458f-bea1-95d7cd74773a
 Spec:
   Acme:
-    Email:  kovtalex@gmail.com
+    Email:  israodin@gmail.com
     Private Key Secret Ref:
       Name:  letsencrypt-staging
     Server:  https://acme-staging-v02.api.letsencrypt.org/directory
@@ -2837,7 +2837,7 @@ Spec:
           Class:  nginx
 Status:
   Acme:
-    Last Registered Email:  kovtalex@gmail.com
+    Last Registered Email:  israodin@gmail.com
     Uri:                    https://acme-staging-v02.api.letsencrypt.org/acme/acct/13939356
   Conditions:
     Last Transition Time:  2020-05-30T17:09:47Z
@@ -2951,7 +2951,7 @@ helm lint
 
 ```consol
 helm package .
-Successfully packaged chart and saved it to: /Users/alexey/kovtalex_platform/kubernetes-templating/frontend/frontend-0.1.0.tgz
+Successfully packaged chart and saved it to: ./kubernetes-templating/frontend/frontend-0.1.0.tgz
 ```
 
 - Заливаем
@@ -3682,7 +3682,7 @@ gpg: глубина: 0  достоверных:   1  подписанных:   0
 --------------------------------
 pub   rsa2048 2020-05-29 [SC]
       1EFA58CC515C2A87D5834A86C12D0C3E96B08842
-uid         [  абсолютно ] alexey <kovtalex@hmail.com>
+uid         [  абсолютно ] alexey <israodin@gmail.com>
 sub   rsa2048 2020-05-29 [E]
 ```
 
@@ -5212,7 +5212,7 @@ spec:
     spec: # Описание Pod
       containers: # Описание контейнеров внутри Pod
       - name: web # Название контейнера
-        image: kovtalex/simple-web:0.1 # Образ из которого создается контейнер
+        image: israodin/simple-web:0.1 # Образ из которого создается контейнер
         readinessProbe:
           httpGet:
             path: /index.html
@@ -5290,7 +5290,7 @@ spec:
     spec: # Описание Pod
       containers: # Описание контейнеров внутри Pod
       - name: web # Название контейнера
-        image: kovtalex/simple-web:0.1 # Образ из которого создается контейнер
+        image: israodin/simple-web:0.1 # Образ из которого создается контейнер
         readinessProbe:
           httpGet:
             path: /index.html
@@ -5432,9 +5432,9 @@ kubectl get events -w
 0s          Normal    Started                   pod/web-54c8466885-b8lvv    Started container init-web
 0s          Normal    Started                   pod/web-54c8466885-v2229    Started container init-web
 0s          Normal    Started                   pod/web-54c8466885-xjtgn    Started container init-web
-0s          Normal    Pulled                    pod/web-54c8466885-xjtgn    Container image "kovtalex/simple-web:0.2" already present on machine
-0s          Normal    Pulled                    pod/web-54c8466885-v2229    Container image "kovtalex/simple-web:0.2" already present on machine
-0s          Normal    Pulled                    pod/web-54c8466885-b8lvv    Container image "kovtalex/simple-web:0.2" already present on machine
+0s          Normal    Pulled                    pod/web-54c8466885-xjtgn    Container image "israodin/simple-web:0.2" already present on machine
+0s          Normal    Pulled                    pod/web-54c8466885-v2229    Container image "israodin/simple-web:0.2" already present on machine
+0s          Normal    Pulled                    pod/web-54c8466885-b8lvv    Container image "israodin/simple-web:0.2" already present on machine
 0s          Normal    Created                   pod/web-54c8466885-xjtgn    Created container web
 0s          Normal    Created                   pod/web-54c8466885-v2229    Created container web
 0s          Normal    Created                   pod/web-54c8466885-b8lvv    Created container web
@@ -6714,7 +6714,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: kovtalex/hipster-frontend:v0.0.2
+        image: israodin/hipster-frontend:v0.0.2
         env:
           - name: PRODUCT_CATALOG_SERVICE_ADDR
             value: "productcatalogservice:3550"
@@ -6828,8 +6828,8 @@ frontend   3         3         3       9m44s
 - Добавим на DockerHub версию образа с новым тегом (**v0.0.2**, можно просто перетегировать старый образ)
 
 ```console
-docker build -t kovtalex/hipster-frontend:v0.0.2 .
-docker push kovtalex/hipster-frontend:v0.0.2
+docker build -t israodin/hipster-frontend:v0.0.2 .
+docker push israodin/hipster-frontend:v0.0.2
 ```
 
 - Обновим в манифесте версию образа
@@ -6849,7 +6849,7 @@ frontend-hgsx4   1/1     Running   0          3m19s
 ```console
 kubectl get replicaset frontend -o=jsonpath='{.spec.template.spec.containers[0].image}'
 
-kovtalex/hipster-frontend:v0.0.2%  
+israodin/hipster-frontend:v0.0.2%  
 ```
 
 И образ из которого сейчас запущены pod, управляемые контроллером:
@@ -6857,7 +6857,7 @@ kovtalex/hipster-frontend:v0.0.2%
 ```console
 kubectl get pods -l app=frontend -o=jsonpath='{.items[0:3].spec.containers[0].image}'
 
-kovtalex/hipster-frontend:v0.0.1 kovtalex/hipster-frontend:v0.0.1 kovtalex/hipster-frontend:v0.0.1%  
+israodin/hipster-frontend:v0.0.1 israodin/hipster-frontend:v0.0.1 israodin/hipster-frontend:v0.0.1%  
 ```
 
 > Обратим внимание на использование ключа **-o jsonpath** для форматирования вывода. Подробнее с данным функционалом kubectl можно ознакомиться по [ссылке](https://kubernetes.io/docs/reference/kubectl/jsonpath/).
@@ -6867,7 +6867,7 @@ kovtalex/hipster-frontend:v0.0.1 kovtalex/hipster-frontend:v0.0.1 kovtalex/hipst
 ```console
 kubectl get pods -l app=frontend -o=jsonpath='{.items[0:3].spec.containers[0].image}'
 
-kovtalex/hipster-frontend:v0.0.2 kovtalex/hipster-frontend:v0.0.2 kovtalex/hipster-frontend:v0.0.2%
+israodin/hipster-frontend:v0.0.2 israodin/hipster-frontend:v0.0.2 israodin/hipster-frontend:v0.0.2%
 ```
 
 > Обновление ReplicaSet не повлекло обновление запущенных pod по причине того, что ReplicaSet не умеет рестартовать запущенные поды при обновлении шаблона
@@ -6882,10 +6882,10 @@ kovtalex/hipster-frontend:v0.0.2 kovtalex/hipster-frontend:v0.0.2 kovtalex/hipst
 - Валидный манифест **paymentservice-replicaset.yaml** с тремя репликами, разворачивающими из образа версии v0.0.1
 
 ```console
-docker build -t kovtalex/hipster-paymentservice:v0.0.1 .
-docker build -t kovtalex/hipster-paymentservice:v0.0.2 .
-docker push kovtalex/hipster-paymentservice:v0.0.1
-docker push kovtalex/hipster-paymentservice:v0.0.2
+docker build -t israodin/hipster-paymentservice:v0.0.1 .
+docker build -t israodin/hipster-paymentservice:v0.0.2 .
+docker push israodin/hipster-paymentservice:v0.0.1
+docker push israodin/hipster-paymentservice:v0.0.2
 ```
 
 Приступим к написанию Deployment манифеста для сервиса **payment**
@@ -6914,7 +6914,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: kovtalex/hipster-frontend:v0.0.1
+        image: israodin/hipster-frontend:v0.0.1
         env:
           - name: PRODUCT_CATALOG_SERVICE_ADDR
             value: "productcatalogservice:3550"
@@ -7003,7 +7003,7 @@ paymentservice-84f44df66-kzrkr    1/1     Terminating         0          3m28s
 ```console
 kubectl get pods -l app=paymentservice -o=jsonpath='{.items[0:3].spec.containers[0].image}'
 
-kovtalex/hipster-paymentservice:v0.0.2 kovtalex/hipster-paymentservice:v0.0.2 kovtalex/hipster-paymentservice:v0.0.2%
+israodin/hipster-paymentservice:v0.0.2 israodin/hipster-paymentservice:v0.0.2 israodin/hipster-paymentservice:v0.0.2%
 ```
 
 ```console
@@ -7115,7 +7115,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: kovtalex/hipster-paymentservice:v0.0.1
+        image: israodin/hipster-paymentservice:v0.0.1
 ```
 
 Применим манифест:
@@ -7196,7 +7196,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: kovtalex/hipster-paymentservice:v0.0.1
+        image: israodin/hipster-paymentservice:v0.0.1
 ```
 
 Проверяем результат:
@@ -7612,8 +7612,8 @@ USER 1001
 - Соберем из Dockerfile образ контейнера и поместим его в публичный Container Registry (например, Docker Hub)
 
 ```console
-docker build -t kovtalex/simple-web:0.1 .
-docker push kovtalex/simple-web:0.1
+docker build -t israodin/simple-web:0.1 .
+docker push israodin/simple-web:0.1
 ```
 
 ### Манифест pod
@@ -7630,7 +7630,7 @@ metadata:
 spec: # Описание Pod
   containers: # Описание контейнеров внутри Pod
   - name: web # Название контейнера
-    image: kovtalex/simple-web:0.1 # Образ из которого создается контейнер
+    image: israodin/simple-web:0.1 # Образ из которого создается контейнер
 ```
 
 Поместим манифест web-pod.yaml в директорию kubernetesintro и применим его:
@@ -7676,7 +7676,7 @@ Events:
   Type    Reason     Age    From               Message
   ----    ------     ----   ----               -------
   Normal  Scheduled  3m23s  default-scheduler  Successfully assigned default/web to minikube
-  Normal  Pulled     3m22s  kubelet, minikube  Container image "kovtalex/simple-web:0.1" already present on machine
+  Normal  Pulled     3m22s  kubelet, minikube  Container image "israodin/simple-web:0.1" already present on machine
   Normal  Created    3m22s  kubelet, minikube  Created container web
   Normal  Started    3m22s  kubelet, minikube  Started container web
 ```
@@ -7689,11 +7689,11 @@ Events:
 
 ```console
 Events:
-  Warning  Failed     12s               kubelet, minikube  Failed to pull image "kovtalex/simple-web:0.2": rpc error: code = Unknown desc = Error response from daemon: manifest for kovtalex/simple-web:0.2 not found: manifest unknown: manifest unknown
+  Warning  Failed     12s               kubelet, minikube  Failed to pull image "israodin/simple-web:0.2": rpc error: code = Unknown desc = Error response from daemon: manifest for israodin/simple-web:0.2 not found: manifest unknown: manifest unknown
   Warning  Failed     12s               kubelet, minikube  Error: ErrImagePull
-  Normal   BackOff    12s               kubelet, minikube  Back-off pulling image "kovtalex/simple-web:0.2"
+  Normal   BackOff    12s               kubelet, minikube  Back-off pulling image "israodin/simple-web:0.2"
   Warning  Failed     12s               kubelet, minikube  Error: ImagePullBackOff
-  Normal   Pulling    0s (x2 over 14s)  kubelet, minikube  Pulling image "kovtalex/simple-web:0.2"
+  Normal   Pulling    0s (x2 over 14s)  kubelet, minikube  Pulling image "israodin/simple-web:0.2"
 ```
 
 Вывод **kubectl describe pod web** если мы забыли, что Container Registry могут быть приватными:
@@ -7740,7 +7740,7 @@ metadata:
 spec: # Описание Pod
   containers: # Описание контейнеров внутри Pod
   - name: web # Название контейнера
-    image: kovtalex/simple-web:0.1 # Образ из которого создается контейнер
+    image: israodin/simple-web:0.1 # Образ из которого создается контейнер
     volumeMounts:
     - name: app
       mountPath: /app
@@ -7800,8 +7800,8 @@ kubectl port-forward --address 0.0.0.0 pod/web 8000:8000
 
 ```console
 git clone https://github.com/GoogleCloudPlatform/microservices-demo.git
-docker build -t kovtalex/hipster-frontend:v0.0.1 .
-docker push kovtalex/hipster-frontend:v0.0.1
+docker build -t israodin/hipster-frontend:v0.0.1 .
+docker push israodin/hipster-frontend:v0.0.1
 ```
 
 Рассмотрим альтернативный способ запуска pod в нашем Kubernetes кластере.
@@ -7811,18 +7811,18 @@ docker push kovtalex/hipster-frontend:v0.0.1
 Разберем пример для запуска **frontend** pod:
 
 ```console
-kubectl run frontend --image kovtalex/hipster-frontend:v0.0.1 --restart=Never
+kubectl run frontend --image israodin/hipster-frontend:v0.0.1 --restart=Never
 ```
 
 - **kubectl run** - запустить ресурс
 - **frontend** - с именем frontend
-- **--image** - из образа kovtalex/hipster-frontend:v0.0.1 (подставим свой образ)
+- **--image** - из образа israodin/hipster-frontend:v0.0.1 (подставим свой образ)
 - **--restart=Never** указываем на то, что в качестве ресурса запускаем pod. [Подробности](https://kubernetes.io/docs/reference/kubectl/conventions/)
 
 Один из распространенных кейсов использования ad-hoc режима - генерация манифестов средствами kubectl:
 
 ```console
-kubectl run frontend --image kovtalex/hipster-frontend:v0.0.1 --restart=Never --dryrun -o yaml > frontend-pod.yaml
+kubectl run frontend --image israodin/hipster-frontend:v0.0.1 --restart=Never --dryrun -o yaml > frontend-pod.yaml
 ```
 
 Рассмотрим дополнительные ключи:
