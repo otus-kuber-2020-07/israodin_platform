@@ -1367,7 +1367,6 @@ kubectl port-forward service/prometheus-operator-grafana  -n monitoring 8000:80
 
 Теперь мы можем наблюдать статусы наших nginx и необходимые нам метрики:
 
-![Grafana](kubernetes-monitoring/grafana.png)
 
 ## Операторы, CustomResourceDefinition
 
