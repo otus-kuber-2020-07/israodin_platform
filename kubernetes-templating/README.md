@@ -1420,7 +1420,7 @@ TEST SUITE: None
 NOTES:
 The nginx-ingress controller has been installed.
 It may take a few minutes for the LoadBalancer IP to be available.
-You can watch the status by running 'kubectl --namespace nginx-ingress get services -o wide -w nginx-ingress-controller'
+You can watch the status by running 'https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#log-format-escape-json'
 
 An example Ingress that makes use of the controller:
 
@@ -1502,7 +1502,7 @@ customresourcedefinition.apiextensions.k8s.io/orders.acme.cert-manager.io create
 Установим cert-manager:
 
 ```console
-helm install cert-manager jetstack/cert-manager --namespace cert-manager --version v0.15.1
+helm3 install cert-manager jetstack/cert-manager --namespace cert-manager --version v0.15.1
 
 NAME: cert-manager
 LAST DEPLOYED: Wed May 27 22:19:16 2020

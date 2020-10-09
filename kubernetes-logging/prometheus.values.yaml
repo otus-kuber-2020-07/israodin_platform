@@ -1,0 +1,30 @@
+prometheus:
+  ingress:
+      enabled: true
+      annotations: {
+        kubernetes.io/ingress.class: nginx
+      }
+      path: /
+      hosts:
+        - prometheus.34.66.28.196.xip.io
+  prometheusSpec:
+    tolerations:
+    - key: node-role
+      operator: Equal
+      value: infra
+      effect: NoSchedule
+    serviceMonitorSelectorNilUsesHelmValues: false
+grafana:
+  ingress:
+      enabled: true
+      annotations: {
+        kubernetes.io/ingress.class: nginx
+      }
+      path: /
+      hosts:
+        - grafana.34.66.28.196.xip.io
+additionalDataSources:
+    - name: Loki
+      type: loki
+      url: http://loki:3100/
+      access: proxy
